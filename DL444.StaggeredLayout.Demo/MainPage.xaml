@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="DL444.StaggeredLayout.Demo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DL444.StaggeredLayout.Demo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:dsc="using:DL444.StaggeredLayout.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="ViewModelDataTemplate" x:DataType="local:ViewModel">
+            <Grid Height="{x:Bind Height}" Background="{ThemeResource SystemListMediumColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{x:Bind Image}" Stretch="UniformToFill" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind Height}" Margin="8" VerticalAlignment="Center" Grid.Row="1"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <muxc:ItemsRepeaterScrollHost>
+            <ScrollViewer>
+                <muxc:ItemsRepeater ItemsSource="{x:Bind ViewModels}" ItemTemplate="{StaticResource ViewModelDataTemplate}">
+                    <muxc:ItemsRepeater.Layout>
+                        <dsc:StaggeredLayout Padding="16" HorizontalAlignment="Stretch" DesiredColumnWidth="240" RowSpacing="8" ColumnSpacing="12"/>
+                    </muxc:ItemsRepeater.Layout>
+                </muxc:ItemsRepeater>
+            </ScrollViewer>
+        </muxc:ItemsRepeaterScrollHost>
+    </Grid>
+</Page>
